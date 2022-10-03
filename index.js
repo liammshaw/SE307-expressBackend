@@ -98,11 +98,16 @@ function addUser(user){
 
 app.delete('/users/:id', (req, res) => {
     const id = req.params['id'];
+    const idx = obj => {return obj.id === id};
     let result = findUserById(id);
-    if (result == undefined)
+    console.log(id);
+    console.log(result);
+    if (result === undefined)
         res.status(404).send("Resource not found.");
     else{
-        delete users[result]
+        let index = users.users_list.findIndex(idx);
+        console.log(users.users_list[index])
+        users.users_list.splice(index, 1);
         res.send("User deleted");
     }
 });
